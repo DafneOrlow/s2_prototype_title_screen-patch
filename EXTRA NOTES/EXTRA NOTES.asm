@@ -16,7 +16,7 @@
 ; SECTION "TitlePrototypeArt",ROM0
 ;         ~~~~~~~~~~~~~~~~~~~~~~~~
 
-; TO FIX the error it needs a "; " before SECTION. Somthing the original uploader fails to mention above.
+; TO FIX the error it needs a "; " before SECTION. Somthing the original uploader fails to mention.
 =================================================================================================================================
 
 ;
