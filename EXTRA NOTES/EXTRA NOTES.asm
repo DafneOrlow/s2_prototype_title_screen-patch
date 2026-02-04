@@ -1,12 +1,12 @@
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;ADDITIONAL NOTES (Dafne Orlow)
+; ADDITIONAL NOTES (Dafne Orlow)
 
 ; [1] - SECTION	"TitlePrototypeArt",ROM0
 ============================================================================================================================================
 ; Then, add or modify the following small ASM snippet in your disassembly (suggested: create a file Data/TitlePrototypePatch.asm and include it where other data is included).
 ; This snippet tells the build which art/mapping/palette to use for the title screen.
 ============================================================================================================================================
-; HOW is this a clear, easy to follow instruction? When copying lines 18-33 of this file, particularly "SECTION "TitlePrototypeArt",ROM0"
+; HOW is this a clear, easy to follow instruction? When copying the required lines, particularly "SECTION "TitlePrototypeArt",ROM0"
 ; AS IT IS SHOWN, to the top of the suggested "Data/TitlePrototypePatch.asm" file
 ; it produces an error when building the ROM. 
 
