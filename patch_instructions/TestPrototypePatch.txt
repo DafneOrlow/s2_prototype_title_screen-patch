@@ -1,0 +1,55 @@
+; =========================
+; PATCH: Integrate Prototype Title Screen assets
+; Place the files from this zip into your s2disasm tree:
+;  - art/nemesis/TitleScr.nem
+;  - mappings/misc/TitleScr.eni
+;  - art/palettes/TitlScrn.pal
+;
+; Then, add or modify the following small ASM snippet in your disassembly (suggested: create a file Data/TitlePrototypePatch.asm and include it where other data is included).
+; This snippet tells the build which art/mapping/palette to use for the title screen.
+; Adjust paths if your project uses different directories.
+;
+; NOTE: s2disasm's build process may not reference files directly by filename. If your build uses explicit binary includes, replace the example .incbin lines with the assembler directives your toolchain expects.
+; Example shown assumes including binary data directly into the ROM at appropriate labels.
+
+; --- Example labels (match labels used by s2disasm constants) ---
+; If these labels already exist elsewhere, rename or comment out the originals before assembling.
+
+SECTION	"TitlePrototypeArt",ROM0
+
+; Prototype Title Screen Nemesis data
+; Make sure assembler supports INCFILE or similar. Here we use a generic .incbin directive; change to your assembler's directive if different.
+Art_TitleProto:
+    ; include binary nemesis data
+    ; adjust path as necessary relative to your build root
+    incbin "art/nemesis/TitleScr.nem"
+
+; Prototype title screen mapping (eni)
+Map_TitleProto:
+    incbin "mappings/misc/TitleScr.eni"
+
+; Prototype title screen palette
+Pal_TitleProto:
+    incbin "art/palettes/TitlScrn.pal"
+
+; --- Hooking into title load ---
+; Find where the retail title screen loads its art/mapping/palette.
+; Commonly labels like ArtPtr_Title, MapPtr_Title, PalPtr_Title are used.
+; Replace those pointers with the prototype labels, for example:
+;   dc.l Art_TitleProto
+;   dc.l Map_TitleProto
+;   dc.l Pal_TitleProto
+;
+; If the pointers are defined in s2.constants.asm, you can change like:
+;   ; old:
+;   ; PalPtr_Title: dc.l art/palettes/Title screen.bin
+;   ; new:
+;   PalPtr_Title: dc.l Pal_TitleProto
+;
+; If you're unsure where to edit: search s2disasm for 'PalPtr_Title' or 'ArtTile_ArtNem_Title' and update accordingly.
+
+; --- Final notes ---
+; - After adding files & patch, run the normal build (make/build.bat).
+; - If the palette looks wrong, it's likely a 16-color vs 32-color mismatch or endian issue; let me know and I can adjust the palette format.
+; - If the ROM fails to build due to label conflicts, send me the error and I will create a version fully integrated into the s2disasm tree.
+; =========================
